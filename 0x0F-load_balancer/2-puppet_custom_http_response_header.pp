@@ -8,12 +8,11 @@ exec { 'update':
 }
 -> file_line { 'header line':
   ensure => present,
-  path   => '/etc/nginx/sites-available/default',
-  line   => "	location / {
-  add_header X-Served-By ${hostname};",
-  match  => '^\tlocation / {',
+  path   => '/etc/nginx/nginx.conf',
+  line   => "\tadd_header X-Served-By ${hostname};",
+  after  => 'http{',
 }
 -> exec { 'restart service':
-  command  => 'sudo service nginx restart',
+  command  => 'sudo /usr/sbin/service nginx restart',
   provider => shell,
 }`
