@@ -1,10 +1,9 @@
-
 #!/usr/bin/env bash
 #Configure your domain zone so that the subdomain www and display information about subdomains
 
 if [ "$#" = 1 ]
 then
-    subdomains=("www" "lb-01" "web-01" "web-02")
+    subdomains=("www" "104442-lb-01" "104442-web-01" "104442-web-02")
     for sub_domain in "${subdomains[@]}"
     do
 	record_type=$(dig $sub_domain.$1 | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')
