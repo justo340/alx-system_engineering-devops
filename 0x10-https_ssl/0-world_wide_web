@@ -3,7 +3,7 @@
 
 if [ "$#" = 1 ]
 then
-    subdomains=("www" "100.25.215.126" "34.224.17.222" "54.90.30.17")
+    subdomains=("www" "lb-01" "web-01" "web-02")
     for sub_domain in "${subdomains[@]}"
     do
 	record_type=$(dig $sub_domain.$1 | grep -A1 'ANSWER SECTION' | tail -1 | awk '{print $4}')
