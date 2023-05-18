@@ -1,6 +1,10 @@
-# Sky is the limit, let's bring that limit higher
-exec { 'file limit':
-  onlyif  => 'test -e /etc/default/nginx',
-  command => 'sed -i "5s/[0-9]\+/$( ulimit -n )/" /etc/default/nginx; service nginx restart',
-  provider => shell,
+# Fix the nginx requests limit
+exec { 'upgrade':
+  path    => '/bin/',
+  command => 'sed -i "s/15/4096" /etc/default/nginx',
+}
+
+exec { 'restart':
+  path    => '/usr/bin/',
+  command => 'service nginx restart',
 }
